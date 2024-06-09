@@ -10,6 +10,9 @@ services:
         volumes:
             - ./docker/nginx/volumes/default.conf:/etc/nginx/conf.d/default.conf
             - ./docker/nginx/volumes/nginx.conf:/etc/nginx/nginx.conf
+            # php_fpmと同じマウントが必要
+            # nginxとphp-fpmが別々で、MVC系rewriteルール時の正攻法
+            - ./projects/php_fpm:/var/www
         environment:
             TZ: Asia/Tokyo
             SERVER_ENV: local
@@ -27,7 +30,8 @@ services:
         volumes:
             - ./docker/php_fpm/volumes/php-fpm.conf:/etc/php/8.3/fpm/php-fpm.conf
             - ./docker/php_fpm/volumes/www.conf:/etc/php/8.3/fpm/pool.d/www.conf
-            - ./projects/php_fpm:/scripts
+            # php-fpmがphalconのスケルトンプロジェクトベースになっている。その中のpublicがドキュメントルート
+            - ./projects/php_fpm:/var/www
         environment:
             TZ: Asia/Tokyo
             SERVER_ENV: local
