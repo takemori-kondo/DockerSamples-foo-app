@@ -1,0 +1,51 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+?>
+
+<div class="page-header">
+    <h1>Search zzz_sample</h1>
+    <p><?php echo $this->tag->a($this->url->get("zzz_sample/new"), "Create zzz_sample") ?></p>
+</div>
+
+<?php echo $this->getContent() ?>
+
+<?php echo $this->flash->output() ?>
+
+<form action="<?= $this->url->get('zzz_sample/search') ?>" class="form-horizontal" method="get">
+    <div class="form-group">
+    <label for="fieldZzzSampleId" class="col-sm-2 control-label">Zzz Of Sample</label>
+    <div class="col-sm-10">
+        <?= $this->tag->inputText("zzz_sample_id", $zzz_sample->zzz_sample_id, ["size" => 30, "class" => "form-control", "id" => "fieldZzzSampleId"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldZzzSampleCd" class="col-sm-2 control-label">Zzz Of Sample Of Cd</label>
+    <div class="col-sm-10">
+        <?= $this->tag->inputText("zzz_sample_cd", $zzz_sample->zzz_sample_cd, ["size" => 30, "class" => "form-control", "id" => "fieldZzzSampleCd"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldName" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+        <?= $this->tag->inputText("name", $zzz_sample->name, ["size" => 30, "class" => "form-control", "id" => "fieldName"]) ?>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="fieldKind" class="col-sm-2 control-label">Kind</label>
+    <div class="col-sm-10">
+        <?= $this->tag->inputText("kind", $zzz_sample->kind, ["class" => "form-control", "id" => "fieldKind"]) ?>
+    </div>
+</div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <?php echo $this->tag->inputSubmit("search", "Search", ["class" => "btn btn-primary"]) ?>
+        </div>
+    </div>
+</form>
