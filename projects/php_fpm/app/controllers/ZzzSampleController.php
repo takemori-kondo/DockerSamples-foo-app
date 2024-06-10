@@ -101,15 +101,15 @@ class ZzzSampleController extends ControllerBase
         }
 
         $zzz_sample = new ZzzSample();
-        $zzz_sample->zzzSampleId = $this->request->getPost("zzz_sample_id");
-        $zzz_sample->zzzSampleCd = $this->request->getPost("zzz_sample_cd");
+        $zzz_sample->zzz_sample_id = (int)$this->request->getPost("zzz_sample_id");
+        $zzz_sample->zzz_sample_cd = $this->request->getPost("zzz_sample_cd");
         $zzz_sample->name = $this->request->getPost("name");
         $zzz_sample->kind = $this->request->getPost("kind");
         
 
         if (!$zzz_sample->save()) {
             foreach ($zzz_sample->getMessages() as $message) {
-                $this->flash->error($message);
+                $this->flash->error("{$message}");
             }
 
             $this->dispatcher->forward([
