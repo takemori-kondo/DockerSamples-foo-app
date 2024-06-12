@@ -9,6 +9,23 @@ use Phalcon\Paginator\Adapter\Model;
 
 class ZzzSampleController extends ControllerBase
 {
+    public function ApiAction()
+    {
+        $this->response->setRawHeader("HTTP/1.1 200 OK");
+        $this->response->setRawHeader("Content-Type: application/json");
+        $this->response->setRawHeader("Cache-Control: no-cache");
+        $obj = new class {
+            public $foo = 'FOOOOOOOO!';
+            public $bar = 'BARRRRRRR!';
+            public function baz() {
+                return 'BAZ!';
+            }
+        };
+        $jsonText = json_encode($obj, JSON_HEX_TAG | JSON_HEX_AMP);
+        $this->response->setContentLength(strlen($jsonText));
+        return $this->response->setContent($jsonText);
+    }
+
     /**
      * Index action
      */
