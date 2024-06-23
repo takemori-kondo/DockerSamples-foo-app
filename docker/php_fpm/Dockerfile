@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get -y update
-RUN apt-get -y install curl vim unzip
+RUN apt-get -y install curl vim unzip iputils-ping
 RUN apt-get -y install software-properties-common
 RUN add-apt-repository ppa:ondrej/php
 RUN apt-get -y update
@@ -23,13 +23,6 @@ RUN mkdir -p /var/log/php8.3-fpm && \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN apt-get -y install php-phalcon5
-
-# RUN echo 'xdebug.default_enable = 1' >> /etc/php.d/15-xdebug.ini
-# RUN echo 'xdebug.idekey = "vscode"' >> /etc/php.d/15-xdebug.ini
-# RUN echo 'xdebug.remote_enable = 1' >> /etc/php.d/15-xdebug.ini
-# RUN echo 'xdebug.remote_port=9000' >> /etc/php.d/15-xdebug.ini
-# RUN echo 'xdebug.remote_autostart = 1' >> /etc/php.d/15-xdebug.ini
-# RUN echo 'xdebug.remote_host=<develop pc's IP>'
 
 # php-fpm.conf の pidパラメータのディレクトリを作る（ないので）
 RUN mkdir -p /run/php/

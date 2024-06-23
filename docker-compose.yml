@@ -27,9 +27,15 @@ services:
         build: ./docker/php_fpm
         ports:
             - 9000:9000
+            # xdebug
+            - 9003:9003
+        # xdebug
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
         volumes:
             - ./docker/php_fpm/volumes/php-fpm.conf:/etc/php/8.3/fpm/php-fpm.conf
             - ./docker/php_fpm/volumes/www.conf:/etc/php/8.3/fpm/pool.d/www.conf
+            - ./docker/php_fpm/volumes/20-xdebug.ini:/etc/php/8.3/fpm/conf.d/20-xdebug.ini
             # php-fpmがphalconのスケルトンプロジェクトベースになっている。その中のpublicがドキュメントルート
             - ./projects/php_fpm:/var/www
         environment:
