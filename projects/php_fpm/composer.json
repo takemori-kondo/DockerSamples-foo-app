@@ -1,5 +1,6 @@
 {
-    "require": {
-        "phalcon/devtools": "5.0.x-dev"
+    "require-dev": {
+        "phalcon/devtools": "5.0.x-dev",
+        "phalcon/ide-stubs": "5.6.1"
     }
 }
