@@ -1,5 +1,5 @@
 <?php
-// PHP Version 8.3
+// PHP8.3
 declare(strict_types=1);
 
 // basic parameter

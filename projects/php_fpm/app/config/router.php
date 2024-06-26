@@ -1,4 +1,6 @@
 <?php
+// PHP8.3
+declare(strict_types=1);
 
 $router = $di->getRouter();
 

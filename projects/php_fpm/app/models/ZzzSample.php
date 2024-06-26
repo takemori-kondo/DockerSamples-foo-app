@@ -1,4 +1,6 @@
 <?php
+// PHP8.3
+declare(strict_types=1);
 
 class ZzzSample extends \Phalcon\Mvc\Model
 {
@@ -57,5 +59,4 @@ class ZzzSample extends \Phalcon\Mvc\Model
     {
         return parent::findFirst($parameters);
     }
-
 }

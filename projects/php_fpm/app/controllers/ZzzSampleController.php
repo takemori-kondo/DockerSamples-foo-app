@@ -1,7 +1,6 @@
 <?php
+// PHP8.3
 declare(strict_types=1);
-
- 
 
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model;
@@ -14,10 +13,12 @@ class ZzzSampleController extends ControllerBase
         $this->response->setRawHeader("HTTP/1.1 200 OK");
         $this->response->setRawHeader("Content-Type: application/json");
         $this->response->setRawHeader("Cache-Control: no-cache");
-        $obj = new class {
+        $obj = new class
+        {
             public $foo = 'FOOOOOOOO!';
             public $bar = 'BARRRRRRR!';
-            public function baz() {
+            public function baz()
+            {
                 return 'BAZ!';
             }
         };
@@ -122,7 +123,7 @@ class ZzzSampleController extends ControllerBase
         $zzz_sample->zzz_sample_cd = $this->request->getPost("zzz_sample_cd");
         $zzz_sample->name = $this->request->getPost("name");
         $zzz_sample->kind = $this->request->getPost("kind");
-        
+
 
         if (!$zzz_sample->save()) {
             foreach ($zzz_sample->getMessages() as $message) {
@@ -179,7 +180,7 @@ class ZzzSampleController extends ControllerBase
         $zzz_sample->zzzSampleCd = $this->request->getPost("zzz_sample_cd");
         $zzz_sample->name = $this->request->getPost("name");
         $zzz_sample->kind = $this->request->getPost("kind");
-        
+
 
         if (!$zzz_sample->save()) {
 
