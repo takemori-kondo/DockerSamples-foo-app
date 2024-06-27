@@ -5,17 +5,24 @@ declare(strict_types=1);
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model;
 
-
 class ZzzSampleController extends ControllerBase
 {
-    public function ApiAction(int $param = 0)
+    public function ApiAction(int $param = 0, ?string $param2 = null, ?string $param3 = null)
     {
         if ($param === 400) {
-            return ResponseUtil::create400BadRequest();
+            if ($param2 === null) {
+                return ResponseUtil::create400BadRequest();
+            } else {
+                return ResponseUtil::create400BadRequest(new ErrorDto($param2, $param3));
+            }
         } else if ($param === 403) {
             return ResponseUtil::create403Forbidden();
         } else if ($param === 500) {
-            return ResponseUtil::create500InternalServerError();
+            if ($param2 === null) {
+                return ResponseUtil::create500InternalServerError();
+            } else {
+                return ResponseUtil::create500InternalServerError($param2);
+            }
         }
         $result = new class
         {
