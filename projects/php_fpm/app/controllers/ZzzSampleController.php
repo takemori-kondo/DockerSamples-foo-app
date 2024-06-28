@@ -7,7 +7,7 @@ use Phalcon\Paginator\Adapter\Model;
 
 class ZzzSampleController extends ControllerBase
 {
-    public function ApiAction(mixed $param = 0, ?string $param2 = null, ?string $param3 = null)
+    public function ApiAction(string $param = "", ?string $param2 = null, ?string $param3 = null)
     {
         if ($param === "create" || $param === "update") {
             if ($param === "create") {
@@ -22,27 +22,27 @@ class ZzzSampleController extends ControllerBase
                 "kind" => "api",
             ];
             $affectedRowsCount = PhalconDbUtil::executeBySql($this->db, $sql, $params);
-            return ResponseUtil::setup200Response($this->response, $affectedRowsCount);
+            return ResponseUtil::setup200_OK($affectedRowsCount);
         } else if ($param === "read") {
             $sql = "SELECT zzz_sample_id, zzz_sample_cd, name, kind FROM zzz_sample WHERE zzz_sample_id<=:zzz_sample_id";
             $params = ["zzz_sample_id" => $param2];
             $rows = PHalconDbUtil::queryBySql($this->db, $sql, $params);
-            return ResponseUtil::setup200Response($this->response, $rows);
+            return ResponseUtil::setup200_OK($rows);
         }
 
-        if ($param === 400) {
+        if ($param === "400") {
             if ($param2 === null) {
-                return ResponseUtil::create400BadRequest();
+                return ResponseUtil::setup400_BadRequest();
             } else {
-                return ResponseUtil::create400BadRequest(new ErrorDto($param2, $param3));
+                return ResponseUtil::setup400_BadRequest(new ErrorDto($param2, $param3));
             }
-        } else if ($param === 403) {
-            return ResponseUtil::create403Forbidden();
-        } else if ($param === 500) {
+        } else if ($param === "403") {
+            return ResponseUtil::setup403_Forbidden();
+        } else if ($param === "500") {
             if ($param2 === null) {
-                return ResponseUtil::create500InternalServerError();
+                return ResponseUtil::setup500_InternalServerError();
             } else {
-                return ResponseUtil::create500InternalServerError($param2);
+                return ResponseUtil::setup500_InternalServerError($param2);
             }
         }
         $result = new class
@@ -50,7 +50,7 @@ class ZzzSampleController extends ControllerBase
             public $foo = 'FOOOOOOOO!';
             public $bar = 'BARRRRRRR!';
         };
-        return ResponseUtil::setup200Response($this->response, $result);
+        return ResponseUtil::setup200_OK($result);
     }
 
     /**
