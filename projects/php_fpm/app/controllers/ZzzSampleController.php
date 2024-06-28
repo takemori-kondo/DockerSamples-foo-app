@@ -7,8 +7,29 @@ use Phalcon\Paginator\Adapter\Model;
 
 class ZzzSampleController extends ControllerBase
 {
-    public function ApiAction(int $param = 0, ?string $param2 = null, ?string $param3 = null)
+    public function ApiAction(mixed $param = 0, ?string $param2 = null, ?string $param3 = null)
     {
+        if ($param === "create" || $param === "update") {
+            if ($param === "create") {
+                $sql = "INSERT INTO zzz_sample(zzz_sample_id, zzz_sample_cd, name, kind) VALUES(:zzz_sample_id, :zzz_sample_cd, :name, :kind)";
+            } else {
+                $sql = "UPDATE zzz_sample SET  zzz_sample_cd=:zzz_sample_cd , name=:name, kind=:kind WHERE zzz_sample_id=:zzz_sample_id";
+            }
+            $params = [
+                "zzz_sample_id" => $param2,
+                "zzz_sample_cd" => "code_$param2",
+                "name" => $param3 ?? "no name",
+                "kind" => "api",
+            ];
+            $affectedRowsCount = PhalconDbUtil::executeBySql($this->db, $sql, $params);
+            return ResponseUtil::setup200Response($this->response, $affectedRowsCount);
+        } else if ($param === "read") {
+            $sql = "SELECT zzz_sample_id, zzz_sample_cd, name, kind FROM zzz_sample WHERE zzz_sample_id<=:zzz_sample_id";
+            $params = ["zzz_sample_id" => $param2];
+            $rows = PHalconDbUtil::queryBySql($this->db, $sql, $params);
+            return ResponseUtil::setup200Response($this->response, $rows);
+        }
+
         if ($param === 400) {
             if ($param2 === null) {
                 return ResponseUtil::create400BadRequest();

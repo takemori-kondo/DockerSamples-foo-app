@@ -8,7 +8,7 @@ class ResponseUtil
 {
     public const ENCODE_OPTION = JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE;
 
-    public static function setup200Response(Response $response, object $result): Response
+    public static function setup200Response(Response $response, null | bool | int | string | array | object $result): Response
     {
         $response->setRawHeader('HTTP/1.1 200 OK');
         $response->setRawHeader('Content-Type: application/json');
