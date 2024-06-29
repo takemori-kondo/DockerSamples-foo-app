@@ -9,6 +9,11 @@ class ZzzSampleController extends ControllerBase
 {
     public function ApiAction(string $param = "", ?string $param2 = null, ?string $param3 = null)
     {
+        LogUtil::info(__METHOD__ . "|{$param} {$param2} {$param3}");
+        LogUtil::debug('this is debug');
+        LogUtil::warn('this is warn');
+        LogUtil::error('this is error');
+
         if ($param === "create" || $param === "update") {
             if ($param === "create") {
                 $sql = "INSERT INTO zzz_sample(zzz_sample_id, zzz_sample_cd, name, kind) VALUES(:zzz_sample_id, :zzz_sample_cd, :name, :kind)";

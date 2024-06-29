@@ -37,6 +37,11 @@ try {
     include APP_PATH . '/config/loader.php';
 
     /**
+     * アプリケーション固有の追加の初期化処理
+     */
+    include APP_PATH . '/config/additional_initialize.php';
+
+    /**
      * Handle the request
      */
     $application = new \Phalcon\Mvc\Application($di);
