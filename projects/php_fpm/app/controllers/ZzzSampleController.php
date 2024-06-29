@@ -21,12 +21,12 @@ class ZzzSampleController extends ControllerBase
                 "name" => $param3 ?? "no name",
                 "kind" => "api",
             ];
-            $affectedRowsCount = PhalconDbUtil::executeBySql($this->db, $sql, $params);
+            $affectedRowsCount = PhalconDbUtil::executeBySql($sql, $params);
             return ResponseUtil::setup200_OK($affectedRowsCount);
         } else if ($param === "read") {
             $sql = "SELECT zzz_sample_id, zzz_sample_cd, name, kind FROM zzz_sample WHERE zzz_sample_id<=:zzz_sample_id";
             $params = ["zzz_sample_id" => $param2];
-            $rows = PHalconDbUtil::queryBySql($this->db, $sql, $params);
+            $rows = PhalconDbUtil::queryBySql($sql, $params);
             return ResponseUtil::setup200_OK($rows);
         }
 
